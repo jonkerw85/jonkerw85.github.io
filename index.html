@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>Html-Qrcode Demo</title>
+
+<body>
+    <div id="qr-reader" style="width:500px"></div>
+    <div id="qr-reader-results"></div>
+    <p>Gescande producten.</p>
+    <ul id="scannedProductsList"></ul>
+</body>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+    function docReady (fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete"
+            || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    docReady(function () {
+        var resultContainer = document.getElementById('qr-reader-results');
+        var lastResult, countResults = 0;
+        function onScanSuccess (decodedText, decodedResult) {
+            if (decodedText !== lastResult) {
+                ++countResults;
+                lastResult = decodedText;
+                // Handle on success condition with the decoded message.
+                console.log(`Scan result ${decodedText}`, decodedResult);
+                addResultToList(decodedText)
+            }
+        }
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+    });
+
+    function addResultToList (text) {
+        // Step 1: Get a reference to the div element with the id "scannedProductsList"
+        var scannedProductsListDiv = document.getElementById("scannedProductsList");
+
+        // Step 2: Create a new element (for example, a div)
+        var newElement = document.createElement("li");
+
+        // Step 3: Set attributes or content for the new element
+        newElement.textContent = text;
+        newElement.className = "added-element"; // Add a CSS class if needed
+
+        // Step 4: Append the new element to the "scannedProductsList" div
+        scannedProductsListDiv.appendChild(newElement);
+    }
+</script>
+</head>
+
+</html>
