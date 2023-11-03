@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body>
-    <div id="qr-reader" style="width:95vw"></div>
-        <p>Gescande producten.</p>
-        <h2>
-            <ul id="scannedProductsList"></ul>
-        </h2>
+    <div id="qr-reader" style="width:95vw;height:80vh"></div>
 </body>
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
@@ -33,7 +29,7 @@
                 lastResult = decodedText;
                 // Handle on success condition with the decoded message.
                 console.log(`Scan result ${decodedText}`, decodedResult);
-                addResultToList(decodedText)
+                window.location = 'https://www.hogewegonline.nl/zoeken?search=' + decodedText
             }
         }
 
@@ -47,21 +43,6 @@
             });
         html5QrcodeScanner.render(onScanSuccess);
     });
-
-    function addResultToList (text) {
-        // Step 1: Get a reference to the div element with the id "scannedProductsList"
-        var scannedProductsListDiv = document.getElementById("scannedProductsList");
-
-        // Step 2: Create a new element (for example, a div)
-        var newElement = document.createElement("li");
-
-        // Step 3: Set attributes or content for the new element
-        newElement.textContent = text;
-        newElement.className = "added-element"; // Add a CSS class if needed
-
-        // Step 4: Append the new element to the "scannedProductsList" div
-        scannedProductsListDiv.appendChild(newElement);
-    }
 </script>
 </head>
 
