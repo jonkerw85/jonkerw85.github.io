@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body>
-    <div id="qr-reader" style="width:90vw"></div>
-    <div style="width:90vw">
+    <div id="qr-reader" style="width:95vw"></div>
         <p>Gescande producten.</p>
         <h2>
             <ul id="scannedProductsList"></ul>
         </h2>
-    </div>
 </body>
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
@@ -40,7 +38,13 @@
         }
 
         var html5QrcodeScanner = new Html5QrcodeScanner(
-            "qr-reader", { fps: 10, qrbox: 250 });
+            "qr-reader",             {
+                fps: 5,
+                qrbox: 250,
+                rememberLastUsedCamera: true,
+                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                showTorchButtonIfSupported: true
+            });
         html5QrcodeScanner.render(onScanSuccess);
     });
 
