@@ -42,7 +42,7 @@
 			});
 
 			cameraButton.addEventListener('click', async function () {
-				stream = await navigator.mediaDevices.getUserMedia({ video: true });
+				stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
 				video.srcObject = stream;
 				video.play();
 			});
