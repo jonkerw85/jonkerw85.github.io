@@ -83,7 +83,13 @@
 	<div id="result"></div>
 
 	<script>
-		
+		const videoElement = document.getElementById('video');
+		const captureButton = document.getElementById('capture');
+
+		document.getElementById('camera').addEventListener('click', () => {
+			videoElement.style.display = 'block';
+			captureButton.style.display = 'block';
+		});
 	</script>
 </body>
 
